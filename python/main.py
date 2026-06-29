@@ -9,10 +9,13 @@ def add_student():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
-        INSERT INTO students
-        VALUES (student_seq.NEXTVAL, :1, :2, :3, :4)
-    """, (name, age, course, marks))
+    cur.execute(
+        """
+        INSERT INTO students(name, age, course, marks)
+        VALUES (%s, %s, %s, %s)
+        """,
+        (name, age, course, marks)
+    )
 
     conn.commit()
     cur.close()
@@ -45,7 +48,7 @@ def update_marks():
     cur = conn.cursor()
 
     cur.execute(
-        "UPDATE students SET marks = :1 WHERE id = :2",
+        "UPDATE students SET marks = %s WHERE id = %s",
         (marks, sid)
     )
 
@@ -62,7 +65,7 @@ def delete_student():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("DELETE FROM students WHERE id = :1", (sid,))
+    cur.execute("DELETE FROM students WHERE id = %s", (sid,))
     conn.commit()
 
     cur.close()

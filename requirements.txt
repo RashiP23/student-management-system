@@ -5,4 +5,8 @@
 
 # ```txt
 # cx_Oracle
-oracledb
+psycopg2-binary
+streamlit
+pandas
+scikit-learn
+plotly
